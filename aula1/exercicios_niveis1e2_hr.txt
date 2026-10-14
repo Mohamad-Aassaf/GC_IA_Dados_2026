@@ -1,0 +1,107 @@
+Feitos em aula, enviarei o resto resolvido em outro arquivo
+  
+SQL LAB — EXERCÍCIOS DO SCHEMA HR ORACLE
+Minhas consultas — sem gabarito
+
+================================================================
+
+EXERCÍCIO 01 — Contratações em ordem
+Nível 1: Consultas básicas, filtros e ordenação
+Liste o sobrenome (LAST_NAME), cargo (JOB_ID) e data de contratação (HIRE_DATE) de todos os funcionários, ordenando da contratação mais antiga para a mais recente.
+
+SELECT last_name, job_id, hire_date FROM HR.EMPLOYEES
+ORDER BY hire_date;
+
+----------------------------------------------------------------
+
+EXERCÍCIO 02 — Salários e cargo
+Nível 1: Consultas básicas, filtros e ordenação
+Exiba o primeiro nome, sobrenome e salário dos funcionários que ganham mais de $12.000 e ocupam o cargo IT_PROG.
+
+SELECT first_name, last_name, salary 
+FROM HR.EMPLOYEES
+WHERE salary > 12000
+AND job_id = 'IT_PROG';
+
+----------------------------------------------------------------
+
+EXERCÍCIO 03 — Sobrenomes com J ou K
+Nível 1: Consultas básicas, filtros e ordenação
+Selecione todos os funcionários cujo sobrenome (LAST_NAME) começa com a letra J ou com a letra K.
+
+SELECT last_name 
+FROM HR.EMPLOYEES
+WHERE last_name LIKE 'J%' OR last_name LIKE 'K%';
+
+----------------------------------------------------------------
+
+EXERCÍCIO 04 — Nome completo e comissão
+Nível 1: Consultas básicas, filtros e ordenação
+Exiba o nome completo (primeiro nome + sobrenome) e a comissão (COMMISSION_PCT) de todos os funcionários que recebem comissão, em ordem decrescente do percentual.
+
+SELECT CONCAT(first_name, last_name), commission_pct
+FROM HR.EMPLOYEES
+WHERE commission_pct IS NOT NULL
+ORDER BY commission_pct DESC;
+
+----------------------------------------------------------------
+
+EXERCÍCIO 05 — Localizações dos EUA e Canadá
+Nível 1: Consultas básicas, filtros e ordenação
+Mostre o ID da localização, endereço de rua e cidade das localizações cujo país (COUNTRY_ID) é US ou CA.
+
+SELECT location_id, street_address, city, country_id
+FROM HR.LOCATIONS
+WHERE country_id = 'US' OR country_id = 'CA';
+
+----------------------------------------------------------------
+
+EXERCÍCIO 06 — Funcionário e departamento
+Nível 2: Junções (JOINs) e relacionamentos
+Exiba o primeiro nome de cada funcionário, seu ID de departamento e o nome do departamento (DEPARTMENT_NAME).
+
+SELECT e.first_name, e.department_id,
+d.department_name
+FROM HR.EMPLOYEES e
+LEFT JOIN departments d ON e.department_id = d.department_id;
+
+
+----------------------------------------------------------------
+
+EXERCÍCIO 07 — Cargo e faixa salarial
+Nível 2: Junções (JOINs) e relacionamentos
+Liste o primeiro nome do funcionário, o título do cargo (JOB_TITLE) e os salários mínimo e máximo permitidos para o cargo.
+
+SELECT e.first_name, j.job_title,
+j.min_salary, J.max_salary
+FROM HR.EMPLOYEES 
+JOIN JOBS j ON e.job_id = j.job_id;
+
+----------------------------------------------------------------
+
+EXERCÍCIO 08 — Departamento e localização
+Nível 2: Junções (JOINs) e relacionamentos
+Mostre o sobrenome de cada funcionário, o nome do departamento, a cidade (CITY) e o estado (STATE_PROVINCE) onde o departamento está localizado.
+
+SELECT e.last_name,
+d.department_name,
+l.city,
+l.state_province
+
+----------------------------------------------------------------
+
+EXERCÍCIO 09 — Quem é o gerente?
+Nível 2: Junções (JOINs) e relacionamentos
+Liste o primeiro nome de cada funcionário e o primeiro nome do seu respectivo gerente. Nomeie as colunas como Funcionario e Gerente.
+
+-- Não respondido
+
+----------------------------------------------------------------
+
+EXERCÍCIO 10 — Todos os departamentos
+Nível 2: Junções (JOINs) e relacionamentos
+Liste todos os departamentos e a quantidade de funcionários em cada um, incluindo os departamentos sem funcionários, com contagem 0.
+
+-- Não respondido
+
+----------------------------------------------------------------
